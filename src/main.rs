@@ -132,7 +132,7 @@ impl WebServer {
 
                 if nbytes != 0 {
                     *response = WebServer::make_response(&buffer, &nbytes).unwrap();
-                    poll.register(stream, Token(conn_id), Ready::writable(), PollOpt::edge()).unwrap();
+                    poll.reregister(stream, Token(conn_id), Ready::writable(), PollOpt::edge()).unwrap();
                 } else {
                     self.connections.remove(&conn_id);
                 }
